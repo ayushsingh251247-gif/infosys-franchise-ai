@@ -64,13 +64,13 @@ Add screenshots to a `screenshots/` folder and update the filenames below to mat
 
 | Screen / flow | Screenshot |
 |---|---|
-| Login | `screenshots/login.png` |
-| Signup | `screenshots/signup.png` |
-| Forgot password — security question | `screenshots/forgot-password-security-question.png` |
-| Forgot password — email OTP | `screenshots/forgot-password-otp.png` |
-| OTP email | `screenshots/otp-email.png` |
-| User dashboard | `screenshots/user-dashboard.png` |
-| Admin dashboard | `screenshots/admin-dashboard.png` |
+| Login | ![Login](screenshots/login.png) |
+| Signup | [Signup](screenshots/signup.png) |
+| Forgot password — security question | [Security Question](screenshots/forgot-password-security-question.png) |
+| Forgot password — email OTP | [OTP](screenshots/forgot-password-otp.png) |
+| OTP email | [OTP Email](screenshots/otp-email.png) |
+| User dashboard | [User Dashboard](screenshots/user-dashboard.png) |
+| Admin dashboard | [Admin Dashboard](screenshots/admin-dashboard.png) |
 
 ## Project file
 
