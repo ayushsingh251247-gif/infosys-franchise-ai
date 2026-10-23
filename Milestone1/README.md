@@ -65,25 +65,14 @@ Add screenshots to a `screenshots/` folder and update the filenames below to mat
 | Screen / flow | Screenshot |
 |---|---|
 | Login | ![Login](screenshots/login.png) |
-| Signup | [Signup](screenshots/signup.png) |
-| Forgot password — security question | [Security Question](screenshots/forgot-password-security-question.png) |
-| Forgot password — email OTP | [OTP](screenshots/forgot-password-otp.png) |
-| OTP email | [OTP Email](screenshots/otp-email.png) |
-| User dashboard | [User Dashboard](screenshots/user-dashboard.png) |
-| Admin dashboard | [Admin Dashboard](screenshots/admin-dashboard.png) |
+| Signup | ![Signup](screenshots/signup.png) |
+| Forgot password — security question | ![Security Question](screenshots/forgot-password-security-question.png) |
+| Forgot password — email OTP | ![OTP](screenshots/forgot-password-otp.png) |
+| OTP email | ![OTP Email](screenshots/otp-email.png) |
+| User dashboard | ![User Dashboard](screenshots/user-dashboard.png) |
+| Admin dashboard | ![Admin Dashboard](screenshots/admin-dashboard.png) |
 
 ## Project file
 
 - `Infosys_Milestone1_Authentication.ipynb` — notebook containing the application implementation and run setup.
-
-## Notes
-
-- A successful signup or password reset should return the user to the login page; users receive a fresh JWT after logging in.
-- Keep passwords, OTPs, JWT secrets, ngrok tokens, Gmail App Passwords, and administrator credentials private.
-- Before committing the notebook, clear cell outputs and verify that no real credentials, OTPs, or private tunnel information are present.
-
----
-**Internship:** Infosys Springboard Internship 7.0  
-**Batch:** 4  
-**Milestone:** 1 — User Authentication Module
 
