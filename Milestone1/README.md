@@ -1,78 +1,137 @@
-# Infosys Springboard Internship 7.0 — Batch 4, Milestone 1
+# Infosys Springboard Internship 7.0 – Milestone 1
 
 ## User Authentication Module
 
-This project implements a user-authentication application using **Streamlit**. It includes account registration, login, password recovery, JWT-based session handling, and separate user and administrator dashboards. The app is designed to run in Google Colab and expose the Streamlit interface through an **ngrok** tunnel.
+This is my Milestone 1 project for the Infosys Springboard Internship 7.0 (Batch 4). The aim of this milestone is to build a small web application where users can create an account, sign in, and recover their password if they forget it.
 
-## Features
+I used Streamlit to make the interface and Google Colab to run the notebook. The notebook creates the Streamlit app and starts it with an ngrok link so it can be opened in a browser.
 
-- **Login:** Sign in using a username or email and password. A successful login creates a JWT session; invalid credentials produce a general login error.
-- **Signup:** Register with a username, email, password, password confirmation, security question, and security answer. Required fields and duplicate accounts are checked.
-- **Input validation:** Checks required fields, email format, password strength, and password confirmation.
-- **Password recovery:** Reset a password using either the saved security question and answer or a one-time password (OTP) sent to the registered email address.
-- **JWT session management:** Keeps the login token in Streamlit session state and validates it before showing the user dashboard.
-- **User dashboard:** Displays a welcome message for the signed-in user and provides a logout option.
-- **Admin dashboard:** Provides a separate administrator login and displays registered usernames and email addresses without showing password data.
-- **Database:** Uses SQLite for account data; passwords and security answers are stored as hashes.
-- **Colab and public access:** Uses Google Colab Secrets for sensitive configuration and ngrok to expose the Streamlit app.
+## What the project does
 
-## Technology Stack
+- Lets a new user create an account with a username, email, password, and security question.
+- Provides a login page for users and a separate admin login option.
+- Uses bcrypt to hash passwords and security answers before saving them.
+- Uses JWT to create a session token after a successful login.
+- Provides two password-recovery options: security question and email OTP.
+- Sends password-reset OTPs using Gmail SMTP. The OTP is intended to expire after five minutes.
+- Stores registered account details in a local SQLite database created by the app.
+- Shows dashboard pages with navigation options and a logout action.
+- Uses a dark Streamlit layout with `streamlit-option-menu` and Plotly for parts of the interface.
 
-- Python
-- Streamlit
-- SQLite
-- JSON Web Tokens (JWT)
-- bcrypt password hashing
-- Gmail SMTP for OTP email delivery
-- Google Colab Secrets
-- pyngrok / ngrok
-- Plotly and streamlit-option-menu (where used by the notebook UI)
+Please test the different flows in the running app before marking each requirement as complete. The screenshots section below is for screenshots captured from the actual running project.
 
-## Configuration and secrets
+## Tools and libraries
 
-Configure these secrets in the **Secrets** panel in Google Colab and enable notebook access for each one used by the notebook:
+- **Python** – application logic
+- **Streamlit** – web interface
+- **SQLite** – user records
+- **bcrypt** – password and security-answer hashing
+- **PyJWT** – JSON Web Tokens for sessions
+- **smtplib / Gmail SMTP** – sending password-reset OTP emails
+- **pyngrok** – making the Colab-hosted app accessible through a temporary link
+- **Google Colab Secrets** – storing configuration values securely
+- **Plotly** – charts used in the interface
+- **streamlit-option-menu** – navigation menu
 
-| Secret name | Purpose |
+## Files in this folder
+
+```text
+Milestone1/
+├── README.md
+├── Infosys_Milestone1_Authentication.ipynb
+├── requirements.txt
+└── screenshots/
+    └── .gitkeep
+```
+
+The notebook writes the Streamlit app file (`app.py`) and its Streamlit configuration when the relevant notebook cells run. The SQLite database is created when the app starts and users register.
+
+## How to run the project
+
+This notebook is set up for **Google Colab**. It uses Colab Secrets and notebook shell commands, so it will not run locally without changes.
+
+### 1. Open the notebook
+
+1. Download `Infosys_Milestone1_Authentication.ipynb` from this folder, or open it from the repository in Google Colab.
+2. Connect to a Colab runtime.
+3. Open the **Secrets** panel using the key icon in the left sidebar.
+
+### 2. Add the required secrets
+
+Create the following secrets in Colab and switch notebook access on for each one.
+
+| Secret name | What it is for |
 |---|---|
-| `JWT_SECRET` | Secret key used to sign JWT session tokens |
-| `NGROK_AUTHTOKEN` | ngrok authentication token used to create the public tunnel |
-| `EMAIL_ADDRESS` | Gmail address used to send OTP messages |
-| `EMAIL_PASSWORD` | Gmail App Password used for SMTP authentication |
+| `NGROK_AUTHTOKEN` | Your personal ngrok authtoken |
+| `JWT_SECRET` | A long, random string used to sign JWTs |
+| `EMAIL_ADDRESS` | The Gmail address that sends password-reset emails |
+| `EMAIL_PASSWORD` | A Gmail App Password, not your normal Gmail password |
+| `ADMIN_PASSWORD` | The password used for the admin login |
 
-Do not put real tokens, passwords, or other private credentials in the notebook or this repository. Do not commit database files containing real user data.
+For Gmail, turn on 2-Step Verification in your Google Account before creating an App Password. Keep these values private. Do not put their real values in this README, notebook, screenshots, or any public repository.
 
-The administrator credentials are configured separately from ordinary user signup. Follow the implementation in the notebook and keep any administrator password private.
+### 3. Run the notebook
 
-## How to run in Google Colab
+1. Run the notebook cells from the beginning, in order.
+2. Make sure the required secrets are available and notebook access is enabled.
+3. The notebook installs the libraries, writes the app code, and starts Streamlit.
+4. When the launch cell prints an ngrok URL, open that URL in your browser.
+5. Try creating a test account and check the login, password recovery, dashboard, and logout flows.
+6. Test the admin login separately and check what appears in the admin dashboard.
 
-1. Open `Infosys_Milestone1_Authentication.ipynb` in Google Colab.
-2. Add and configure the Colab Secrets listed above. For Gmail OTP, use a Gmail App Password rather than your normal Google account password.
-3. Run the notebook cells from top to bottom. Allow any dependency-installation cells to finish.
-4. Start the Streamlit application on port `8501` and run the ngrok setup cell.
-5. Open the public URL printed by ngrok to use the application.
-6. Test signup, login, both password-recovery methods, the user dashboard, logout, and the separate admin login.
+The ngrok link is temporary. It can change after the Colab runtime restarts, so it should not be saved in the repository or README.
 
-If ngrok reports that the endpoint is already online, stop the previous tunnel/process or reuse the active tunnel instead of creating a second tunnel with the same endpoint.
+### Running locally
 
-## Validation rules
+The notebook uses `google.colab.userdata`, Colab shell commands, and ngrok setup. For that reason, `pip install -r requirements.txt` by itself is not enough to run the complete project locally. The Colab-specific launch code and secret loading would need to be adapted first.
 
-The application validates required form fields, email format, password strength, and password confirmation. The password rule requires at least eight characters, including uppercase and lowercase letters, a number, and a special character. Password recovery applies the same password validation.
+## Validation and security checks
+
+The milestone instructions ask for the following checks. Please confirm each one in the app before treating it as finished:
+
+- Required fields should not be left blank.
+- Email addresses should follow the format required by the milestone.
+- Passwords should be at least eight characters and include an uppercase letter, a lowercase letter, a number, and a special character.
+- The confirm-password field should match the password exactly.
+- A username or email that is already registered should be rejected.
+- A failed user login should show a general error rather than saying which credential was incorrect.
+- The security-question answer and email OTP recovery routes should both work.
+- A reset OTP should expire after five minutes.
+- The dashboard should require a valid login session, and logout should clear the session.
+- The admin view should show registered usernames/emails only, not password data.
+
+Passwords and security answers are hashed in the app. Still, this is an internship learning project and should not be used as a production authentication service without a security review.
 
 ## Screenshots
 
-Add screenshots to a `screenshots/` folder and update the filenames below to match the images you include.
+Take these screenshots from your own running application and upload the image files to the `screenshots` folder. The links below will display the images once those files have been added. Do not use screenshots that expose email passwords, secret values, OTPs, or private user data.
 
-| Screen / flow | Screenshot |
-|---|---|
-| Login | ![Login](screenshots/login.png) |
-| Signup | ![Signup](screenshots/signup.png) |
-| Forgot password — security question | ![Security Question](screenshots/forgot-password-security-question.png) |
-| Forgot password — email OTP | ![OTP](screenshots/forgot-password-otp.png) |
-| OTP email | ![OTP Email](screenshots/otp-email.png) |
-| User dashboard | ![User Dashboard](screenshots/user-dashboard.png) |
-| Admin dashboard | ![Admin Dashboard](screenshots/admin-dashboard.png) |
+### 1. Login page
 
-## Project file
+![Login page](screenshots/login.png)
 
-- `Infosys_Milestone1_Authentication.ipynb` — notebook containing the application implementation and run setup.
+### 2. Signup page
+
+![Signup page](screenshots/signup.png)
+
+### 3. Forgot password – security question
+
+![Forgot password security question](screenshots/forgot-security-question.png)
+
+### 4. Forgot password – OTP option
+
+![Forgot password OTP](screenshots/forgot-otp.png)
+
+### 5. OTP email
+
+![OTP email](screenshots/otp-email.png)
+
+### 6. User dashboard
+
+![User dashboard](screenshots/user-dashboard.png)
+
+### 7. Admin dashboard
+
+![Admin dashboard](screenshots/admin-dashboard.png)
+
 
