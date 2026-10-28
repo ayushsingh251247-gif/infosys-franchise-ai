@@ -116,7 +116,7 @@ Take these screenshots from your own running application and upload the image fi
 
 ### 3. Forgot password – security question
 
-![Forgot password security question](screenshots/forgot-security-question.png)
+![Forgot password security question](screenshots/forgot-password.png)
 
 ### 4. Forgot password – OTP option
 
