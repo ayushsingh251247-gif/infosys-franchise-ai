@@ -590,14 +590,3 @@ The project is developed collaboratively by a four-member team.
 
 
 
----
-
-<div align="center">
-
-## 💙 FranchiseOps AI
-
-**Built as part of Infosys Springboard Internship 7.0**
-
-*Transforming franchise operations through secure access, intelligent automation and data-driven insights.*
-
-</div>
